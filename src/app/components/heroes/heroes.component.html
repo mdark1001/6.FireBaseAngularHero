@@ -1,0 +1,78 @@
+<h1>
+  Heroes
+</h1>
+<hr>
+<div class="row">
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+    <button
+      [routerLink]="['/heroe','0']"
+      type="button" class="btn btn-outline-primary pull-right">Agregar
+    </button>
+
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="table-responsive">
+      <table class="table ">
+        <thead class="thead-inverse">
+        <tr>
+          <th>#</th>
+          <th>Nombre</th>
+          <th>Tipo</th>
+          <th>Opciones</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr *ngFor="let c of heroes|arrayjson; let i = index;" id="c">
+          <td>{{i+1}}</td>
+          <td>{{heroes[c].nombre}}</td>
+          <td>{{ heroes[c].casa|casahero }}</td>
+          <td>
+            <div class="">
+              <button
+                (click)="editar_hero(c)"
+                type="button" class="btn btn-block btn-outline-info">Editar
+              </button>
+
+              <button
+                (click)="delete_hero(c)"
+                type="button" class="btn btn-block btn-outline-danger">Eliminar</button>
+
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <!--
+  <pre>
+  {{this.heroes |json}}
+    </pre> -->
+</div>
+
+<div class="modal fade" id="modal_confirmar_mensaje">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+
+        <h5 class="modal-title">{{modal_title}}</h5>
+      </div>
+      <div class="modal-body">
+        <div class="alert alert-info">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+          <strong>{{modal_msg}}</strong>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+        <button type="button"
+                id="modal_aceptar_btn"
+                class="btn btn-primary">Aceptar</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

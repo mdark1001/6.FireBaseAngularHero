@@ -1,0 +1,50 @@
+<h3>
+  {{title }} <small>{{this.formHero.value.nombre}}</small>
+</h3>
+
+<div class="row animated fadeIn fast">
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="alert alert-danger" *ngIf="this.is_ready &&  this.formHero.invalid">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <strong>Existen algunos campos que son obligatorios</strong>
+    </div>
+
+    <form class="form" [formGroup]="formHero"  (ngSubmit)="guardar()"  novalidate>
+      <legend>Heroe</legend>
+
+      <div class="form-group col-xs-12 col-md-6">
+        <label for="">Nombre</label>
+        <input type="text"
+               class="form-control" [ngClass]="{error:  mostrar_errors('nombre',is_ready)}"
+               formControlName="nombre"
+               placeholder="Input...">
+      </div>
+      <div class="form-group col-xs-12 col-md-6">
+        <label for="">Tipo</label>
+        <select formControlName="casa"
+                [ngClass]="{error:  mostrar_errors('casa',is_ready)}"
+                class="form-control" id="">
+          <option value="">Seleccione una opción</option>
+          <option *ngFor="let item of this.opciones_casa"
+            value="{{item.id}}">{{item.casa}}</option>
+        </select>
+      </div>
+
+      <div class="form-group col-xs-12 col-md-6">
+        <label for="">Descripción</label>
+        <textarea formControlName="descripcion"
+                  [ngClass]="{error:  mostrar_errors('descripcion',is_ready)}"
+                  class="form-control" rows="10"></textarea>
+      </div>
+
+      <button type="submit" class="btn btn-outline-primary"
+      [disabled]="!this.formHero.valid"
+      >Guardar</button>
+      <button
+        [routerLink]="['/heroes']"
+        type="button" class="btn btn-outline-dark">Regresar</button>
+    </form>
+  </div>
+</div>
+
+
